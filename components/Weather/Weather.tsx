@@ -1,5 +1,9 @@
-const Weather = ({ weather }) => {
-  // const { weather, isLoading, isError } = useWeather(location);
+const Weather = ({ weather, error }) => {
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  if (!weather) return null;
 
   return (
     <>

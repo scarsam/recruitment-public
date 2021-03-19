@@ -1,68 +1,69 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
+import { fetchWeather } from "../utils/api";
+import { response } from "./response";
 import App from "../pages/index";
 
-jest.mock("../utils/fetchWeather", () => {
-  return {
-    fetchWeather: jest.fn().mockImplementation(() => {
-      return {
-        coord: {
-          lon: 18.0649,
-          lat: 59.3326,
-        },
-        weather: [
-          {
-            id: 802,
-            main: "Clouds",
-            description: "scattered clouds",
-            icon: "03d",
-          },
-        ],
-        base: "stations",
-        main: {
-          temp: 271.69,
-          feels_like: 267.34,
-          temp_min: 270.93,
-          temp_max: 273.15,
-          pressure: 1019,
-          humidity: 80,
-        },
-        visibility: 10000,
-        wind: {
-          speed: 2.57,
-          deg: 280,
-        },
-        clouds: {
-          all: 40,
-        },
-        dt: 1616046703,
-        sys: {
-          type: 1,
-          id: 1788,
-          country: "SE",
-          sunrise: 1616043317,
-          sunset: 1616086579,
-        },
-        timezone: 3600,
-        id: 2673730,
-        name: "Stockholm",
-        cod: 200,
-      };
-    }),
-  };
-});
+describe("Weather App", () => {
+  beforeEach(() => {
+    fetchMock.resetMocks();
+  });
 
-describe("App", () => {
-  it("fetches the weather and prints the data", async () => {
+  it("fetches the correct location", async () => {
+    fetchMock.mockResponseOnce(JSON.stringify(response));
+
+    fetchWeather("Stockholm").then((data) => {
+      expect(data).toEqual(response);
+    });
+
+    expect(fetchMock.mock.calls[0][0]).toEqual(
+      "http://api.openweathermap.org/data/2.5/weather?q=Stockholm&appid=a17480f70f0d4368ad0b5eabd0e37b66",
+    );
+  });
+
+  it("fetches the weather and outputs the data", async () => {
+    fetchMock.mockResponseOnce(JSON.stringify(response));
     const { findByText, getByText } = render(<App />);
 
-    // Find the button to retrieve the books
     const button = getByText("Get Weather");
     expect(button).toBeInTheDocument();
 
-    // Actually click the button.
     fireEvent.click(button);
 
     const element = await findByText(/Stockholm/i);
+
+    expect(element).toBeInTheDocument();
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("throws an exception when no city is found", async () => {
+    fetchMock.mockResponseOnce(
+      JSON.stringify({ cod: 401, message: "city not found" }),
+      { status: 401 },
+    );
+    const { findByText, getByText } = render(<App />);
+
+    const button = getByText("Get Weather");
+    expect(button).toBeInTheDocument();
+
+    fireEvent.click(button);
+
+    const element = await findByText(/city not found/i);
+
+    expect(element).toBeInTheDocument();
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("throws an exception when the API is down", async () => {
+    const { findByText, getByText } = render(<App />);
+    fetchMock.mockReject(() => Promise.reject(new Error("Server is down")));
+
+    const button = getByText("Get Weather");
+    expect(button).toBeInTheDocument();
+
+    fireEvent.click(button);
+
+    const element = await findByText(/Server is down/i);
+
     expect(element).toBeInTheDocument();
   });
 });

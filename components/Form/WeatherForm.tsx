@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import fetchWeather from "../../utils/fetchWeather";
 
 const WeatherForm = ({ handleSubmit }) => {
   let [location, setLocation] = useState("");
