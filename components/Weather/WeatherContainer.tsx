@@ -1,4 +1,5 @@
 import WeatherCard from "../Card/WeatherCard";
+import { convertDate } from "../../utils/convertDate";
 // import styles from "./Weather.module.css";
 
 const WeatherContainer = ({ weather, error }) => {
@@ -11,9 +12,9 @@ const WeatherContainer = ({ weather, error }) => {
   const { weather: weatherArray, dt, main, wind } = weather;
   return (
     <WeatherCard
-      icon={"h"}
+      icon={weatherArray[0]?.icon}
       description={weatherArray[0]?.description}
-      day={new Date(dt * 1000)}
+      day={convertDate(dt)}
       temprature={main?.temp}
       feelsLike={main?.feels_like}
       wind={wind?.speed}
