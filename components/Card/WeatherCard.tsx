@@ -1,16 +1,19 @@
 import styles from "./WeatherCard.module.css";
-import { tempToFixed } from "../../utils/tempToFixed";
 
 type CardProps = {
+  country: string;
+  location: string;
   icon: string;
   description: string;
   day: string;
-  temprature: string;
-  feelsLike: string;
-  wind: string;
+  temprature: number;
+  feelsLike: number;
+  wind: number;
 };
 
 const WeatherCard = ({
+  country,
+  location,
   icon,
   description,
   day,
@@ -19,24 +22,33 @@ const WeatherCard = ({
   wind,
 }: CardProps): React.ReactElement => {
   return (
-    <div className={styles.card}>
-      <header>
-        <img src={`/icons/${icon}.png`} alt={description} />
+    <>
+      {location === country ? (
+        <p className={styles.location}>{location}</p>
+      ) : (
+        <p className={styles.location}>
+          <strong>{location}</strong>, {country}
+        </p>
+      )}
+      <div className={styles.card}>
+        <header>
+          <img src={`/icons/${icon}.png`} alt={description} />
 
-        <h2>{description}</h2>
-        <time dateTime={day}>{day}</time>
-        <h1>{tempToFixed(temprature)}&deg;</h1>
-      </header>
-      <div className={styles.metaData}>
-        <p>Feels like</p>
-        <strong>{tempToFixed(feelsLike)}&deg;</strong>
+          <h2>{description}</h2>
+          <time dateTime={day}>{day}</time>
+          <h1>{temprature}&deg;</h1>
+        </header>
+        <div className={styles.metaData}>
+          <p>Feels like</p>
+          <strong>{feelsLike}&deg;</strong>
+        </div>
+        <div className={styles.divider} />
+        <div className={styles.metaData}>
+          <p>Wind</p>
+          <strong>{wind}km/j</strong>
+        </div>
       </div>
-      <div className={styles.divider} />
-      <div className={styles.metaData}>
-        <p>Wind</p>
-        <strong>{tempToFixed(wind)}km/j</strong>
-      </div>
-    </div>
+    </>
   );
 };
 
