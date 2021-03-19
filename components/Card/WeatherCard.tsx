@@ -1,9 +1,10 @@
 import styles from "./WeatherCard.module.css";
+import { tempToFixed } from "../../utils/tempToFixed";
 
 type CardProps = {
   icon: string;
   description: string;
-  day: Date;
+  day: string;
   temprature: string;
   feelsLike: string;
   wind: string;
@@ -20,19 +21,20 @@ const WeatherCard = ({
   return (
     <div className={styles.card}>
       <header>
-        <img src={icon} />
+        <img src={`/icons/${icon}.png`} alt={description} />
+
         <h2>{description}</h2>
-        <time dateTime={day.toUTCString()}>{day.toUTCString()}</time>
-        <h1>{temprature}&deg;</h1>
+        <time dateTime={day}>{day}</time>
+        <h1>{tempToFixed(temprature)}&deg;</h1>
       </header>
       <div className={styles.metaData}>
         <p>Feels like</p>
-        <strong>{feelsLike}&deg;</strong>
+        <strong>{tempToFixed(feelsLike)}&deg;</strong>
       </div>
       <div className={styles.divider} />
       <div className={styles.metaData}>
         <p>Wind</p>
-        <strong>{wind}</strong>
+        <strong>{tempToFixed(wind)}km/j</strong>
       </div>
     </div>
   );
