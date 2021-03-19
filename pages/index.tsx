@@ -1,7 +1,9 @@
 import Head from "next/head";
 import { useState } from "react";
-import Weather from "../components/Weather/Weather";
+import WeatherContainer from "../components/Weather/WeatherContainer";
 import WeatherForm from "../components/Form/WeatherForm";
+import Container from "../components/Layout/Container";
+import Layout from "../components/Layout/Layout";
 import { fetchWeather } from "../utils/api";
 
 export default function Home() {
@@ -20,16 +22,15 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <Layout>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main>
-        <Weather weather={weather} error={error} />
+      <Container>
+        <WeatherContainer weather={weather} error={error} />
         <WeatherForm handleSubmit={handleSubmit} />
-      </main>
-    </div>
+      </Container>
+    </Layout>
   );
 }
