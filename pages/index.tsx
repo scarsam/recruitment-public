@@ -11,21 +11,23 @@ export default function Home() {
   const [error, setError] = useState(null);
 
   const handleSubmit = async (location) => {
-    // if (!location) return;
+    if (!location) return;
 
     try {
       const fetchedWeather = await fetchWeather(location);
       setWeather(fetchedWeather);
+      setError(null);
     } catch ({ message }) {
       setError(message);
+      setWeather(null);
     }
   };
 
   return (
     <Layout>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Kronan | Sam Öjling</title>
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <Container>
         <WeatherContainer weather={weather} error={error} />

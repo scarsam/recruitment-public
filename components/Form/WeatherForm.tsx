@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./WeatherForm.module.css";
 
 const WeatherForm = ({ handleSubmit }) => {
   let [location, setLocation] = useState("");
@@ -10,20 +11,16 @@ const WeatherForm = ({ handleSubmit }) => {
   };
 
   return (
-    <div>
-      <h2>How's the weather out there?</h2>
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          placeholder="Enter City"
-          // maxLength="50"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-        />
+    <form className={styles.form} onSubmit={onSubmit}>
+      <input
+        type="text"
+        placeholder="Enter City"
+        value={location}
+        onChange={(e) => setLocation(e.target.value)}
+      />
 
-        <button type="submit">Get Weather</button>
-      </form>
-    </div>
+      <button type="submit">Get Weather</button>
+    </form>
   );
 };
 

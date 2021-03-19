@@ -6,7 +6,12 @@ async function fetchWeather(location) {
     const data = await result.json();
 
     const statusCode = parseInt(data.cod, 10) ?? false;
-    if (statusCode === 401 || statusCode === 404 || statusCode === 429) {
+    if (
+      statusCode === 400 ||
+      statusCode === 401 ||
+      statusCode === 404 ||
+      statusCode === 429
+    ) {
       throw Error(data.message);
     }
 

@@ -1,0 +1,31 @@
+.form {
+  display: flex;
+  margin-top: 25px;
+}
+
+.form input {
+  border: 1px solid #5773ff;
+  border-radius: 3px;
+  flex: 1;
+  margin-right: 10px;
+  padding: 0.75rem;
+}
+
+.form input:focus {
+  border: 1px solid #2f48c4;
+  outline: none;
+}
+
+.form button {
+  color: white;
+  background: #5773ff;
+  border: 1px solid #2f48c4;
+  border-radius: 3px;
+  padding: 0.75rem;
+}
+
+.form button:hover {
+  transition: background 250ms ease-in-out;
+  background: #2f48c4;
+  cursor: pointer;
+}

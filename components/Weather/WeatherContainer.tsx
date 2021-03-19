@@ -1,14 +1,16 @@
 import WeatherCard from "../Card/WeatherCard";
+import MessageCard from "../Card/MessageCard";
 import { convertDate } from "../../utils/convertDate";
 import { tempToFixed } from "../../utils/tempToFixed";
 import { weatherCountry } from "../../utils/weatherCountry";
 
 const WeatherContainer = ({ weather, error }) => {
-  if (error) {
-    return <p>{error}</p>;
-  }
+  if (error) return <MessageCard message={error} />;
 
-  if (!weather) return null;
+  if (!weather)
+    return (
+      <MessageCard message="Enter a location below, to find out the weather" />
+    );
 
   const { weather: weatherArray, dt, main, wind, name, sys } = weather;
 
