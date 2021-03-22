@@ -1,15 +1,5 @@
 import styles from "./WeatherCard.module.css";
-
-type CardProps = {
-  country: string;
-  location: string;
-  icon: string;
-  description: string;
-  day: string;
-  temprature: number;
-  feelsLike: number;
-  wind: number;
-};
+import { CardProps } from "../../types/weather";
 
 const WeatherCard = ({
   country,

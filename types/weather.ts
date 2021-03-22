@@ -19,3 +19,14 @@ export type WeatherData = {
   weather: [{ id: number; main: string; description: string; icon: string }];
   wind: { speed: number; deg: number };
 };
+
+export type CardProps = {
+  country: string;
+  location: string;
+  icon: string;
+  description: string;
+  day: string;
+  temprature: number;
+  feelsLike: number;
+  wind: number;
+};
