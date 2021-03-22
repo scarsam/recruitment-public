@@ -1,1 +1,1 @@
-export const tempToFixed = (val) => Math.floor(parseInt(val, 10));
+export const tempToFixed = (val: number) => Math.floor(val);

@@ -3,8 +3,15 @@ import MessageCard from "../Card/MessageCard";
 import { convertDate } from "../../utils/convertDate";
 import { tempToFixed } from "../../utils/tempToFixed";
 import { weatherCountry } from "../../utils/weatherCountry";
+import { WeatherData } from "../../types/weather";
 
-const WeatherContainer = ({ weather, error }) => {
+const WeatherContainer = ({
+  weather,
+  error,
+}: {
+  weather: WeatherData;
+  error: string;
+}) => {
   if (error) return <MessageCard message={error} />;
 
   if (!weather)

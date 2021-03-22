@@ -8,8 +8,8 @@
 }
 
 .form input {
-  border: 1px solid #5773ff;
   border-radius: 3px;
+  border: 1px solid #5773ff;
   flex: 1;
   margin-right: 10px;
   padding: 0.75rem;
@@ -21,15 +21,15 @@
 }
 
 .form button {
-  color: white;
   background: #5773ff;
-  border: 1px solid #2f48c4;
   border-radius: 3px;
+  border: 1px solid #2f48c4;
+  color: white;
   padding: 0.75rem;
 }
 
 .form button:hover {
-  transition: background 250ms ease-in-out;
   background: #2f48c4;
   cursor: pointer;
+  transition: background 250ms ease-in-out;
 }
