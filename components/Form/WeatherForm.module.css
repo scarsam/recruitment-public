@@ -1,6 +1,6 @@
 .form {
   display: flex;
-  margin-top: 25px;
+  margin-top: 1.5rem;
 }
 
 .form label {
@@ -9,27 +9,27 @@
 
 .form input {
   border-radius: 3px;
-  border: 1px solid #5773ff;
+  border: 1px solid var(--form-light-color);
   flex: 1;
-  margin-right: 10px;
+  margin-right: 1rem;
   padding: 0.75rem;
 }
 
 .form input:focus {
-  border: 1px solid #2f48c4;
+  border: 1px solid var(--form-dark-color);
   outline: none;
 }
 
 .form button {
-  background: #5773ff;
+  background-color: var(--form-light-color);
   border-radius: 3px;
-  border: 1px solid #2f48c4;
+  border: 1px solid var(--form-dark-color);
   color: white;
   padding: 0.75rem;
 }
 
 .form button:hover {
-  background: #2f48c4;
+  background-color: var(--form-dark-color);
   cursor: pointer;
-  transition: background 250ms ease-in-out;
+  transition: background-color 250ms ease-in-out;
 }

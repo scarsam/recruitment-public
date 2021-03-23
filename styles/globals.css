@@ -1,6 +1,16 @@
+html {
+  --background: #e5e5e5;
+  --light-gray: rgba(255, 255, 255, 0.6);
+  --card-gradient: linear-gradient(223.77deg, #5773ff 0%, #4964f2 89.4%),
+    #5773ff;
+  --box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  --form-light-color: #5773ff;
+  --form-dark-color: #2f48c4;
+}
+
 html,
 body {
-  background: #e5e5e5;
+  background-color: var(--background);
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }

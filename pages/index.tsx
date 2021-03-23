@@ -3,7 +3,6 @@ import { useState } from "react";
 import WeatherContainer from "../components/Weather/WeatherContainer";
 import WeatherForm from "../components/Form/WeatherForm";
 import Container from "../components/Layout/Container";
-import Layout from "../components/Layout/Layout";
 import { fetchWeather } from "../utils/api";
 
 export default function Home() {
@@ -24,7 +23,7 @@ export default function Home() {
   };
 
   return (
-    <Layout>
+    <main>
       <Head>
         <title>Kronan | Sam Öjling</title>
         <link rel="icon" href="/favicon.png" />
@@ -33,6 +32,6 @@ export default function Home() {
         <WeatherContainer weather={weather} error={error} />
         <WeatherForm handleSubmit={handleSubmit} />
       </Container>
-    </Layout>
+    </main>
   );
 }
